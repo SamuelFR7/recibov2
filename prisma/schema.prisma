@@ -9,7 +9,7 @@ datasource db {
 
 model Receipt {
   id                String   @id @default(cuid())
-  number            Int      @unique
+  number            Int      @unique @default(autoincrement())
   date              DateTime @db.Timestamp(6)
   value             Decimal
   historic          String?
