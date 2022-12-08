@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Receipt {
+  id                String   @id @default(cuid())
+  number            Int      @unique
+  date              DateTime @db.Timestamp(6)
+  value             Decimal
+  historic          String?
+  recipientName     String
+  recipientAddress  String?
+  recipientDocument String?
+  payerName         String?
+  payerAddress      String?
+  payerDocument     String?
+  Farm              Farm     @relation(fields: [farmId], references: [id])
+  farmId            String
+
+  @@map("receipts")
+}
+
+model Farm {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  payerName     String?
+  payerAddress  String?
+  payerDocument String?
+  receipts      Receipt[]
+
+  @@map("farms")
+}
