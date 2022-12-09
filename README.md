@@ -1,3 +1,4 @@
 ## TODO
 
-[ ] Edit receipt page
+- [ ] Edit receipt page
+- [ ] Pdf generate
