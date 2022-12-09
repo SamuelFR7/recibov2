@@ -124,7 +124,11 @@ const Print: React.FC<{ receipt: ReceiptQueryResult }> = ({ receipt }) => {
             </span>
           </div>
           <div className="flex w-full mt-4 gap-4">
-            <span className="font-medium">{receipt.date}</span>
+            <span className="font-medium">
+              {new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' }).format(
+                new Date(receipt.date),
+              )}
+            </span>
 
             <div className="flex flex-col w-full mt-6">
               <div className="border-b border-black" />
