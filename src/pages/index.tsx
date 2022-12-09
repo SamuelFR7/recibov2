@@ -15,6 +15,10 @@ export default function HomePage() {
     })
   }
 
+  function handlePrint(id: string) {
+    window.open(`/api/receipts/print?id=${id}`)
+  }
+
   return (
     <div>
       <table>
@@ -24,6 +28,7 @@ export default function HomePage() {
             <th>Beneficiario</th>
             <th>Numero</th>
             <th>Valor</th>
+            <th>Imprimir</th>
             <th>Editar</th>
             <th>Excluir</th>
           </tr>
@@ -37,6 +42,9 @@ export default function HomePage() {
                 <td>{item.recipientName}</td>
                 <td>{item.number}</td>
                 <td>{item.value}</td>
+                <td>
+                  <button onClick={() => handlePrint(item.id)}>Imprimir</button>
+                </td>
                 <td>
                   <button>Edit</button>
                 </td>
