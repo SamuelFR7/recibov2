@@ -32,7 +32,6 @@ export const appRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      console.log(input.date)
       const newReceipt = await prisma.receipt.create({
         data: {
           date: input.date,

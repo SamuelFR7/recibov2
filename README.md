@@ -1,4 +1,5 @@
 ## TODO
 
+- [X] Pdf generate
 - [ ] Edit receipt page
-- [ ] Pdf generate
+- [ ] Print multiples receipts
