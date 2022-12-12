@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next'
 import React from 'react'
 import { z } from 'zod'
-import { prisma } from '../../../../server/db/prisma'
-import { AsyncReturnType } from '../../../../utils/ts-bs'
+import { prisma } from '@/server/db/prisma'
+import { AsyncReturnType } from '@/utils/ts-bs'
 import * as Separator from '@radix-ui/react-separator'
 
 const getReceipts = async (id: string) => {

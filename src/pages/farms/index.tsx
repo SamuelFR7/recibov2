@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { trpc } from '../../utils/trpc'
+import { trpc } from '@/utils/trpc'
 
 export default function FarmsPage() {
   const utils = trpc.useContext()
