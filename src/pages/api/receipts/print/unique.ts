@@ -5,12 +5,13 @@ const saveAsPdf = async (id: string) => {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
-  await page.goto(`http://localhost:3000/receipts/print/${id}`, {
+  await page.goto(`http://localhost:3000/receipts/print/unique/${id}`, {
     waitUntil: 'networkidle0',
   })
 
   const result = await page.pdf({
     format: 'a4',
+    printBackground: true,
   })
 
   await browser.close()

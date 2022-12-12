@@ -16,7 +16,7 @@ export default function HomePage() {
   }
 
   function handlePrint(id: string) {
-    window.open(`/api/receipts/print?id=${id}`)
+    window.open(`/api/receipts/print/unique?id=${id}`)
   }
 
   return (
