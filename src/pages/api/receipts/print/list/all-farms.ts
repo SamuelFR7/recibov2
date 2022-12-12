@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import puppeteer from 'puppeteer'
 
-const saveAsPdf = async (id: string) => {
+const saveAsPdf = async () => {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
-  await page.goto(`http://localhost:3000/receipts/print/list/${id}`, {
+  await page.goto('http://localhost:3000/receipts/print/list/all-farms', {
     waitUntil: 'networkidle0',
   })
 
@@ -20,11 +20,9 @@ const saveAsPdf = async (id: string) => {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { id } = req.query
-
   res.setHeader('Content-Type', 'application/pdf')
 
-  const pdf = await saveAsPdf(id as string)
+  const pdf = await saveAsPdf()
 
   return res.send(pdf)
 }

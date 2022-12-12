@@ -79,9 +79,12 @@ const Print: React.FC<{ receipts: ReceiptQueryResult }> = ({ receipts }) => {
                 </tr>
               </thead>
               <tbody>
-                {receipts.map((receipt) => (
+                {receipts.map((receipt, index) => (
                   <>
-                    <tr className="border border-y-gray-300 [&_td]:py-[10px] [&_td]:px-[15px] ">
+                    <tr
+                      key={index}
+                      className="border border-y-gray-300 [&_td]:py-[10px] [&_td]:px-[15px] "
+                    >
                       <td>
                         {new Intl.DateTimeFormat('pt-BR', {
                           dateStyle: 'short',
