@@ -6,10 +6,48 @@ import { AsyncReturnType } from '../../../../utils/ts-bs'
 import * as Separator from '@radix-ui/react-separator'
 
 const getReceipts = async (id: string) => {
+  const receiptSchma = z.object({
+    date: z.date().transform((arg) => String(arg)),
+    value: z.any().transform((arg) => Number(arg)),
+    number: z.number(),
+    historic: z.string(),
+    recipientAddress: z.string(),
+    recipientName: z.string(),
+    recipientDocument: z.string(),
+    payerAddress: z.string(),
+    payerDocument: z.string(),
+    payerName: z.string(),
+    farmId: z.string(),
+  })
+
+  if (id !== '0') {
+    const receiptInPrisma = await prisma.receipt.findMany({
+      where: {
+        farmId: id,
+      },
+      select: {
+        number: true,
+        date: true,
+        value: true,
+        historic: true,
+        recipientAddress: true,
+        recipientName: true,
+        recipientDocument: true,
+        payerAddress: true,
+        payerDocument: true,
+        payerName: true,
+        farmId: true,
+      },
+    })
+
+    const receipts = receiptInPrisma.map((item) => {
+      return receiptSchma.parse(item)
+    })
+
+    return receipts
+  }
+
   const receiptInPrisma = await prisma.receipt.findMany({
-    where: {
-      farmId: id,
-    },
     select: {
       number: true,
       date: true,
@@ -23,20 +61,6 @@ const getReceipts = async (id: string) => {
       payerName: true,
       farmId: true,
     },
-  })
-
-  const receiptSchma = z.object({
-    date: z.date().transform((arg) => String(arg)),
-    value: z.any().transform((arg) => Number(arg)),
-    number: z.number(),
-    historic: z.string(),
-    recipientAddress: z.string(),
-    recipientName: z.string(),
-    recipientDocument: z.string(),
-    payerAddress: z.string(),
-    payerDocument: z.string(),
-    payerName: z.string(),
-    farmId: z.string(),
   })
 
   const receipts = receiptInPrisma.map((item) => {

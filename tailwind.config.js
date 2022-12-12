@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         text: '#6e6b7b',
-        grayPrint: '#f5f6fa'
+        grayPrint: '#f5f6fa',
       }
     },
   },
