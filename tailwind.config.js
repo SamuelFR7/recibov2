@@ -22,7 +22,8 @@ module.exports = {
       border: '#ebe9f1',
       primary: '#5FA8AB',
       primaryHover: '#549DA0',
-      gray: '#f3f2f7'
+      gray: '#f3f2f7',
+      grayHover: '#dedce6'
     },
     boxShadow: {
       'header': '0 4px 24px #22292f1a'

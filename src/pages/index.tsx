@@ -1,4 +1,5 @@
 import { Container } from '@/components/Container'
+import { Pagination } from '@/components/Pagination'
 import { trpc } from '@/utils/trpc'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
@@ -8,6 +9,8 @@ import { useState } from 'react'
 export default function HomePage() {
   const router = useRouter()
   const utils = trpc.useContext()
+  const [receiptsPerPage, setReceiptsPerPage] = useState(10)
+  const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
 
   const receipts = trpc.getReceipts.useQuery()
@@ -39,7 +42,7 @@ export default function HomePage() {
       ? receipts.data.filter((item) => {
           return item.recipientName.includes(search.toUpperCase())
         })
-      : receipts.data
+      : receipts.data.slice(0, receiptsPerPage)
 
   return (
     <div>
@@ -48,8 +51,12 @@ export default function HomePage() {
           <div className="flex">
             <div className="flex items-center mr-5">
               <span>Mostrar</span>
-              <select className="bg-white ml-2 pl-4 pr-10 py-2 border border-border rounded-md">
-                <option>10</option>
+              <select
+                onChange={(e) => setReceiptsPerPage(Number(e.target.value))}
+                className="bg-white ml-2 pl-4 pr-10 py-2 border border-border rounded-md"
+              >
+                <option value={10}>10</option>
+                <option value={25}>25</option>
               </select>
             </div>
             <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
@@ -112,16 +119,12 @@ export default function HomePage() {
             ))}
           </tbody>
         </table>
-        <div className="bg-white text-sm p-4 flex justify-between items-center rounded-b-md">
-          <div>
-            <span>Page 1 of 10</span>
-          </div>
-          <div className="flex items-center">
-            <button>1</button>
-            <button>1</button>
-            <button>1</button>
-          </div>
-        </div>
+        <Pagination
+          onPageChange={setPage}
+          totalCountOfRegisters={receipts.data.length}
+          currentPage={page}
+          registersPerPage={receiptsPerPage}
+        />
       </Container>
     </div>
   )
