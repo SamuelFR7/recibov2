@@ -2,6 +2,7 @@ import { Container } from '@/components/Container'
 import { trpc } from '@/utils/trpc'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
+import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
 
 export default function HomePage() {
@@ -42,8 +43,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <Container classNames="pt-[10rem]">
-        <div className="bg-white p-5 text-sm flex justify-between shadow-header rounded-t-md">
+      <Container classNames="mt-[10rem] shadow-header">
+        <div className="bg-white p-5 text-sm flex justify-between rounded-t-md">
           <div className="flex">
             <div className="flex items-center mr-5">
               <span>Mostrar</span>
@@ -71,7 +72,7 @@ export default function HomePage() {
             />
           </div>
         </div>
-        <table className="w-full text-sm border border-y-0 border-x-border">
+        <table className="w-full text-sm">
           <thead className="bg-gray border border-y-border border-x-0">
             <tr className="[&_th]:px-5 [&_th]:py-3 text-left">
               <th>Fazenda</th>
@@ -84,7 +85,7 @@ export default function HomePage() {
           <tbody className="bg-white">
             {filteredReceipts.map((item, index) => (
               <tr
-                className="[&_td]:px-5 [&_td]:py-3 text-left [&_td]:border [&_td]:border-x-0 [&_td]:border-t-0  [&_td]:border-b-border"
+                className="[&_td]:px-5 [&_td]:py-3 text-left [&_td]:border [&_td]:border-x-0 [&_td]:border-t-0 [&_td]:last:border-b-0  [&_td]:border-b-border"
                 key={index}
               >
                 <td>{item.Farm.name}</td>
@@ -96,15 +97,31 @@ export default function HomePage() {
                     currency: 'BRL',
                   }).format(Number(item.value))}
                 </td>
-                <td className="text-center">
-                  <button onClick={() => handlePrint(item.id)}>Imprimir</button>
-                  <button onClick={() => handleEdit(item.id)}>Edit</button>
-                  <button onClick={() => handleDelete(item.id)}>Delete</button>
+                <td className="flex justify-center gap-3">
+                  <button onClick={() => handlePrint(item.id)}>
+                    <Printer className="w-5 h-5" />
+                  </button>
+                  <button onClick={() => handleEdit(item.id)}>
+                    <Pencil className="w-5 h-5" />
+                  </button>
+                  <button onClick={() => handleDelete(item.id)}>
+                    <Trash className="w-5 h-5" />
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="bg-white text-sm p-4 flex justify-between items-center rounded-b-md">
+          <div>
+            <span>Page 1 of 10</span>
+          </div>
+          <div className="flex items-center">
+            <button>1</button>
+            <button>1</button>
+            <button>1</button>
+          </div>
+        </div>
       </Container>
     </div>
   )
