@@ -91,6 +91,7 @@ const Print: React.FC<{ farms: FarmQueryResult }> = ({ farms }) => {
                             <td>
                               {new Intl.DateTimeFormat('pt-BR', {
                                 dateStyle: 'short',
+                                timeZone: 'UTC',
                               }).format(new Date(receipt.date))}
                             </td>
                             <td>{receipt.number}</td>

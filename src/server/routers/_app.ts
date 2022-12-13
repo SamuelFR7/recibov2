@@ -53,8 +53,7 @@ export const appRouter = router({
     .input(
       z.object({
         id: z.string(),
-        number: z.number(),
-        date: z.date(),
+        date: z.string().transform((arg) => new Date(arg)),
         value: z.number(),
         historic: z.string().nullable(),
         recipientName: z.string(),
@@ -71,7 +70,6 @@ export const appRouter = router({
           id: input.id,
         },
         data: {
-          number: input.number,
           date: input.date,
           value: input.value,
           historic: input.historic?.toUpperCase(),

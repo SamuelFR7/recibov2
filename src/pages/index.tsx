@@ -1,6 +1,8 @@
 import { trpc } from '@/utils/trpc'
+import { useRouter } from 'next/router'
 
 export default function HomePage() {
+  const router = useRouter()
   const utils = trpc.useContext()
   const receipts = trpc.getReceipts.useQuery()
   const deleteMutation = trpc.deleteReceipt.useMutation({
@@ -17,6 +19,10 @@ export default function HomePage() {
 
   function handlePrint(id: string) {
     window.open(`/api/receipts/print/unique?id=${id}`)
+  }
+
+  function handleEdit(id: string) {
+    router.push(`/receipts/edit/${id}`)
   }
 
   return (
@@ -46,7 +52,7 @@ export default function HomePage() {
                   <button onClick={() => handlePrint(item.id)}>Imprimir</button>
                 </td>
                 <td>
-                  <button>Edit</button>
+                  <button onClick={() => handleEdit(item.id)}>Edit</button>
                 </td>
                 <td>
                   <button onClick={() => handleDelete(item.id)}>Delete</button>

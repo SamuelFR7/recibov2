@@ -30,7 +30,7 @@ const getReceipt = async (id: string) => {
   }
 
   const receiptSchma = z.object({
-    date: z.date().transform((arg) => String(arg)),
+    date: z.date().transform((arg) => arg.toISOString().slice(0, 10)),
     value: z.any().transform((arg) => Number(arg)),
     number: z.number(),
     historic: z.string(),
@@ -79,6 +79,7 @@ const Print: React.FC<{ receipt: ReceiptQueryResult }> = ({ receipt }) => {
                 <span>
                   {new Intl.DateTimeFormat('pt-BR', {
                     dateStyle: 'short',
+                    timeZone: 'UTC',
                   }).format(new Date(receipt.date))}
                 </span>
               </div>

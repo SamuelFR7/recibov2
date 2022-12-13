@@ -103,6 +103,7 @@ const Print: React.FC<{ receipts: ReceiptQueryResult }> = ({ receipts }) => {
                     <span>
                       {new Intl.DateTimeFormat('pt-BR', {
                         dateStyle: 'short',
+                        timeZone: 'UTC',
                       }).format(new Date(receipt.date))}
                     </span>
                   </div>
