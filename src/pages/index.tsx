@@ -42,7 +42,10 @@ export default function HomePage() {
       ? receipts.data.filter((item) => {
           return item.recipientName.includes(search.toUpperCase())
         })
-      : receipts.data.slice(0, receiptsPerPage)
+      : receipts.data.slice(
+          (page - 1) * receiptsPerPage,
+          page * receiptsPerPage,
+        )
 
   return (
     <div>
