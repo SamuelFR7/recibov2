@@ -1,3 +1,4 @@
+import { Alert } from '@/components/Alert'
 import { Container } from '@/components/Container'
 import { Pagination } from '@/components/Pagination'
 import { trpc } from '@/utils/trpc'
@@ -113,9 +114,11 @@ export default function HomePage() {
                       <Pencil className="w-5 h-5" />
                     </button>
                   </Link>
-                  <button onClick={() => handleDelete(item.id)}>
-                    <Trash className="w-5 h-5" />
-                  </button>
+                  <Alert action={() => handleDelete(item.id)}>
+                    <button>
+                      <Trash className="w-5 h-5" />
+                    </button>
+                  </Alert>
                 </td>
               </tr>
             ))}

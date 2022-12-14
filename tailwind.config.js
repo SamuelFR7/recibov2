@@ -24,7 +24,9 @@ module.exports = {
       primaryHover: '#549DA0',
       gray: '#f3f2f7',
       grayHover: '#dedce6',
-      warn: '#FF686B'
+      warn: '#FF686B',
+      warnHover: '#fc5d61',
+      modalBg: 'rgba(0, 0, 0, 0.44)'
     },
     boxShadow: {
       'header': '0 4px 24px #22292f1a'

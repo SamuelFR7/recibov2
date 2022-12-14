@@ -12,7 +12,8 @@
 - [X] Farm list styles
 - [X] Farm create styles
 - [X] Edit farm styles
-- [ ] Delete alert dialog
+- [X] Delete alert dialog
+- [ ] Button with cva
 - [ ] Header
 - [ ] New print styles
 - [ ] Authentication

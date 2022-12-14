@@ -5,6 +5,7 @@ import { useState } from 'react'
 import classnames from 'classnames'
 import { Pencil, Trash } from 'phosphor-react'
 import { Pagination } from '@/components/Pagination'
+import { Alert } from '@/components/Alert'
 
 export default function FarmsPage() {
   const [page, setPage] = useState(1)
@@ -95,12 +96,11 @@ export default function FarmsPage() {
                       <Pencil className="w-5 h-5" />
                     </button>
                   </Link>
-                  <button
-                    className="ml-2"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    <Trash className="w-5 h-5" />
-                  </button>
+                  <Alert action={() => handleDelete(item.id)}>
+                    <button className="ml-2">
+                      <Trash className="w-5 h-5" />
+                    </button>
+                  </Alert>
                 </td>
               </tr>
             ))}
