@@ -11,5 +11,6 @@
 - [X] Edit receipt styles
 - [ ] Farm list styles
 - [ ] Farm create styles
+- [ ] Edit farm styles
 - [ ] Delete alert dialog
 - [ ] Header
