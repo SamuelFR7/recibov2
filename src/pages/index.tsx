@@ -3,12 +3,10 @@ import { Pagination } from '@/components/Pagination'
 import { trpc } from '@/utils/trpc'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
 
 export default function HomePage() {
-  const router = useRouter()
   const utils = trpc.useContext()
   const [receiptsPerPage, setReceiptsPerPage] = useState(10)
   const [page, setPage] = useState(1)
@@ -30,10 +28,6 @@ export default function HomePage() {
 
   function handlePrint(id: string) {
     window.open(`/api/receipts/print/unique?id=${id}`)
-  }
-
-  function handleEdit(id: string) {
-    router.push(`/receipts/edit/${id}`)
   }
 
   if (!receipts.data || receipts.isLoading) return <h1>Loading...</h1>
@@ -114,9 +108,11 @@ export default function HomePage() {
                   <button onClick={() => handlePrint(item.id)}>
                     <Printer className="w-5 h-5" />
                   </button>
-                  <button onClick={() => handleEdit(item.id)}>
-                    <Pencil className="w-5 h-5" />
-                  </button>
+                  <Link href={`/receipts/edit/${item.id}`}>
+                    <button>
+                      <Pencil className="w-5 h-5" />
+                    </button>
+                  </Link>
                   <button onClick={() => handleDelete(item.id)}>
                     <Trash className="w-5 h-5" />
                   </button>

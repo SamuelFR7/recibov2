@@ -28,7 +28,10 @@ const fetchReceiptSchema = z.object({
 
 const receiptSchema = z.object({
   date: z.string().min(1, { message: 'É preciso uma data' }),
-  value: z.number().min(1, { message: 'É preciso fornecer um valor' }),
+  value: z
+    .string()
+    .min(1, { message: 'É preciso fornecer um valor' })
+    .transform((arg) => Number(arg)),
   historic: z.string().nullable(),
   recipientName: z.string().min(1, { message: 'É preciso de um nome' }),
   recipientAddress: z.string().nullable(),
