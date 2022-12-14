@@ -125,12 +125,14 @@ export default function HomePage() {
             ))}
           </tbody>
         </table>
-        <Pagination
-          onPageChange={setPage}
-          totalCountOfRegisters={receipts.data.length}
-          currentPage={page}
-          registersPerPage={receiptsPerPage}
-        />
+        {!search ? (
+          <Pagination
+            onPageChange={setPage}
+            totalCountOfRegisters={receipts.data.length}
+            currentPage={page}
+            registersPerPage={receiptsPerPage}
+          />
+        ) : null}
       </Container>
     </div>
   )
