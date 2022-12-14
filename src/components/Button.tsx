@@ -10,6 +10,7 @@ const buttonClasses = cva('rounded-md font-semibold', {
     },
     size: {
       small: 'p-3',
+      medium: 'py-3 px-5',
       full: 'py-3 w-full',
     },
     font: {

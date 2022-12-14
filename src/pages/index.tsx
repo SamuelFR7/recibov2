@@ -1,8 +1,9 @@
 import { Alert } from '@/components/Alert'
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Form/Input'
 import { Container } from '@/components/Container'
 import { Pagination } from '@/components/Pagination'
 import { trpc } from '@/utils/trpc'
-import classNames from 'classnames'
 import Link from 'next/link'
 import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
@@ -58,26 +59,25 @@ export default function HomePage() {
                 <option value={25}>25</option>
               </select>
             </div>
-            <Link href="/receipts/create">
-              <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
-                Adicionar Recibo
-              </button>
-            </Link>
-          </div>
-          <div className="flex items-center">
-            <span>Pesquisar</span>
-            <input
+            <Input
+              label=""
+              name="Search"
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Buscar aqui"
-              className={classNames(
-                'ml-2 mr-5 px-3 py-2',
-                'bg-white border border-border rounded-md',
-                'focus:placeholder:px-1 placeholder:duration-200',
-                'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary',
-              )}
+              placeholder="Pesquisar"
             />
+          </div>
+          <div className="flex gap-3">
+            <Link href="/receipts/create">
+              <Button size="medium">Adicionar Recibo</Button>
+            </Link>
+            <div>
+              <Button size="medium">Imprimir Listagem</Button>
+            </div>
+            <div>
+              <Button size="medium">Imprimir Recibos</Button>
+            </div>
           </div>
         </div>
         <table className="w-full text-sm">

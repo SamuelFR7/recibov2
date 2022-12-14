@@ -2,10 +2,10 @@ import { trpc } from '@/utils/trpc'
 import { Container } from '@/components/Container'
 import Link from 'next/link'
 import { useState } from 'react'
-import classnames from 'classnames'
 import { Pencil, Trash } from 'phosphor-react'
 import { Pagination } from '@/components/Pagination'
 import { Alert } from '@/components/Alert'
+import { Input } from '@/components/Form/Input'
 
 export default function FarmsPage() {
   const [page, setPage] = useState(1)
@@ -50,27 +50,22 @@ export default function FarmsPage() {
                 <option value={25}>25</option>
               </select>
             </div>
-            <Link href="/farms/create">
-              <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
-                Adicionar Fazenda
-              </button>
-            </Link>
+            <div className="flex items-center">
+              <Input
+                label=""
+                name="Search"
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Pesquisar"
+              />
+            </div>
           </div>
-          <div className="flex items-center">
-            <span>Pesquisar</span>
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Nome pagador"
-              className={classnames(
-                'ml-2 mr-5 px-3 py-2',
-                'bg-white border border-border rounded-md',
-                'focus:placeholder:px-1 placeholder:duration-200',
-                'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary',
-              )}
-            />
-          </div>
+          <Link href="/farms/create">
+            <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
+              Adicionar Fazenda
+            </button>
+          </Link>
         </div>
         <table className="w-full text-sm">
           <thead className="bg-gray border border-y-border border-x-0">
