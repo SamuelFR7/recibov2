@@ -23,7 +23,8 @@ module.exports = {
       primary: '#5FA8AB',
       primaryHover: '#549DA0',
       gray: '#f3f2f7',
-      grayHover: '#dedce6'
+      grayHover: '#dedce6',
+      warn: '#FF686B'
     },
     boxShadow: {
       'header': '0 4px 24px #22292f1a'

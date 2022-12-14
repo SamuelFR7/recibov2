@@ -2,6 +2,7 @@ import { Container } from '@/components/Container'
 import { Pagination } from '@/components/Pagination'
 import { trpc } from '@/utils/trpc'
 import classNames from 'classnames'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
@@ -62,9 +63,11 @@ export default function HomePage() {
                 <option value={25}>25</option>
               </select>
             </div>
-            <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
-              Adicionar Recibo
-            </button>
+            <Link href="/receipts/create">
+              <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
+                Adicionar Recibo
+              </button>
+            </Link>
           </div>
           <div className="flex items-center">
             <span>Pesquisar</span>
