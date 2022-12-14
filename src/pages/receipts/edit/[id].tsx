@@ -193,7 +193,9 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
               </div>
             </div>
             <div className="px-3 w-full">
-              <Button type="submit">Editar</Button>
+              <Button font="medium" size="full" type="submit">
+                Editar
+              </Button>
             </div>
           </form>
         </div>

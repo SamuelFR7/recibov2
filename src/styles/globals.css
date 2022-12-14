@@ -10,7 +10,7 @@
 }
 
 @layer utilities {
-    .AlertTransform {
+    .alert-transform {
         transform: translate(-50%, -50%);
     }
 }

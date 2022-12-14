@@ -113,7 +113,9 @@ const EditFarm: React.FC<{ farm: FarmAsyncResult }> = ({ farm }) => {
               </div>
             </div>
             <div className="w-full px-3">
-              <Button type="submit">Editar</Button>
+              <Button font="medium" size="full" type="submit">
+                Editar
+              </Button>
             </div>
           </form>
         </div>

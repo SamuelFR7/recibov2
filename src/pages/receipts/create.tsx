@@ -174,7 +174,9 @@ export default function CreateReceipts() {
               </div>
             </div>
             <div className="px-3 w-full">
-              <Button type="submit">Criar</Button>
+              <Button font="medium" size="full" type="submit">
+                Criar
+              </Button>
             </div>
           </form>
         </div>

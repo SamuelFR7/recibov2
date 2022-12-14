@@ -13,7 +13,7 @@
 - [X] Farm create styles
 - [X] Edit farm styles
 - [X] Delete alert dialog
-- [ ] Button with cva
+- [X] Button with cva
 - [ ] Header
 - [ ] New print styles
 - [ ] Authentication

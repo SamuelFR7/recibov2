@@ -83,7 +83,9 @@ export default function NewFarm() {
               </div>
             </div>
             <div className="w-full px-3">
-              <Button type="submit">Criar</Button>
+              <Button font="medium" size="full" type="submit">
+                Criar
+              </Button>
             </div>
           </form>
         </div>
