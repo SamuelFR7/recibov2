@@ -9,8 +9,10 @@
 - [X] Pagination component funcionalities
 - [X] Create receipt styles
 - [X] Edit receipt styles
-- [ ] Farm list styles
-- [ ] Farm create styles
-- [ ] Edit farm styles
+- [X] Farm list styles
+- [X] Farm create styles
+- [X] Edit farm styles
 - [ ] Delete alert dialog
 - [ ] Header
+- [ ] New print styles
+- [ ] Authentication
