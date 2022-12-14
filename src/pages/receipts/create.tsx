@@ -78,9 +78,10 @@ export default function CreateReceipts() {
             className="flex w-full flex-col gap-4 px-5 pb-5"
           >
             <div className="flex flex-col gap-5">
-              <div className="px-3 grid grid-cols-3 gap-2 [&_div]:flex [&_div]:flex-col [&_label]:mb-1 ">
+              <div className="px-3 grid grid-cols-3 gap-2 [&_div]:flex [&_div]:flex-col">
                 <Select
                   label="Fazenda"
+                  placeholder="Fazenda"
                   {...register('farmId', {
                     onChange: (e) => setPayerData(e.target.value),
                   })}
@@ -101,12 +102,14 @@ export default function CreateReceipts() {
                 <Input
                   error={errors.date}
                   label="Data"
+                  placeholder="Data"
                   {...register('date')}
                   type="date"
                 />
                 <Input
                   error={errors.value}
-                  label="valor"
+                  label="Valor"
+                  placeholder="Valor"
                   {...register('value')}
                   type="number"
                 />
@@ -117,17 +120,20 @@ export default function CreateReceipts() {
                   <Input
                     error={errors.recipientName}
                     label="Nome"
+                    placeholder="Nome"
                     {...register('recipientName')}
                   />
                   <div className="grid grid-cols-2 gap-5 mt-3">
                     <Input
                       error={errors.recipientAddress}
                       label="Endereço"
+                      placeholder="Endereço"
                       {...register('recipientAddress')}
                     />
                     <Input
                       error={errors.recipientDocument}
                       label="Documento"
+                      placeholder="Documento"
                       {...register('recipientDocument')}
                     />
                   </div>
@@ -139,17 +145,20 @@ export default function CreateReceipts() {
                   <Input
                     error={errors.payerName}
                     label="Nome"
+                    placeholder="Nome"
                     {...register('payerName')}
                   />
                   <div className="grid grid-cols-2 gap-5 mt-3">
                     <Input
                       error={errors.payerAddress}
                       label="Endereço"
+                      placeholder="Endereço"
                       {...register('payerAddress')}
                     />
                     <Input
                       error={errors.payerDocument}
                       label="Documento"
+                      placeholder="Documento"
                       {...register('payerDocument')}
                     />
                   </div>
@@ -159,6 +168,7 @@ export default function CreateReceipts() {
                 <Input
                   error={errors.historic}
                   label="Histórico"
+                  placeholder="Histórico"
                   {...register('historic')}
                 />
               </div>

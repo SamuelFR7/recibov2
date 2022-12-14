@@ -24,6 +24,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         ref={ref}
         className={classnames(
           'px-3 py-2 border border-border rounded-md',
+          'focus:placeholder:px-1 placeholder:duration-200',
+          'disabled:cursor-not-allowed',
           'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary',
           error
             ? 'border-warn text-warn focus:border-warn focus:ring-warn'

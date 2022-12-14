@@ -7,8 +7,8 @@
 - [X] Edit receipt page
 - [X] Pagination component styles
 - [X] Pagination component funcionalities
-- [ ] Create receipt styles
-- [ ] Edit receipt styles
+- [X] Create receipt styles
+- [X] Edit receipt styles
 - [ ] Farm list styles
 - [ ] Farm create styles
 - [ ] Delete alert dialog
