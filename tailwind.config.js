@@ -11,14 +11,14 @@ module.exports = {
     fontSize: {
       xsm: '1.16rem',
       sm: ['1.4rem', '1.4rem'],
-      md: '2.03rem'
+      md: '2.03rem',
+      lg: '2.6rem'
     },
     colors: {
       background: '#F5F7FA',
       black: "#000",
       white: "#fff",
       text: '#404e67',
-      grayPrint: '#f5f6fa',
       border: '#ebe9f1',
       primary: '#5FA8AB',
       primaryHover: '#549DA0',

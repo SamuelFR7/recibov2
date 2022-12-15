@@ -15,5 +15,6 @@
 - [X] Delete alert dialog
 - [X] Button with cva
 - [X] Header
-- [ ] New print styles
+- [X] New print styles
+- [ ] Delete dialog animation
 - [ ] Authentication
