@@ -16,5 +16,6 @@
 - [X] Button with cva
 - [X] Header
 - [X] New print styles
+- [ ] Print dialogs
 - [ ] Delete dialog animation
 - [ ] Authentication
