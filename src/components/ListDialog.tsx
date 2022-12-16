@@ -13,6 +13,7 @@ interface ListDialogProps {
 }
 
 export function ListDialog({ children, farms }: ListDialogProps) {
+  const [isOpen, setIsOpen] = useState(false)
   const [farmToPrint, setFarmToPrint] = useState<string | number>(0)
 
   function handleSubmit(e: FormEvent) {
@@ -20,15 +21,17 @@ export function ListDialog({ children, farms }: ListDialogProps) {
 
     if (farmToPrint === 0) {
       window.open('/api/receipts/print/list/all-farms')
-      return setFarmToPrint(0)
+      setFarmToPrint(0)
+      return setIsOpen(false)
     }
 
     window.open(`/api/receipts/print/list/by-farm?id=${farmToPrint}`)
-    return setFarmToPrint(0)
+    setFarmToPrint(0)
+    return setIsOpen(false)
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-modalBg fixed inset-0" />
