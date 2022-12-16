@@ -19,3 +19,4 @@
 - [X] Print dialogs
 - [X] Dialogs animation
 - [ ] Authentication
+- [ ] Refactor trpc routes

@@ -9,6 +9,9 @@ import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
 import { ListDialog } from '@/components/ListDialog'
 import { PrintDialog } from '@/components/PrintDialog'
+import LoginBtn from '@/components/login-btn'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 export default function HomePage() {
   const utils = trpc.useContext()
@@ -50,6 +53,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <LoginBtn />
       <Container classNames="mt-[10rem] shadow-header">
         <div className="bg-white p-5 text-sm flex justify-between rounded-t-md">
           <div className="flex">
@@ -146,3 +150,24 @@ export default function HomePage() {
     </div>
   )
 }
+
+// export const getServerSideProps: GetServerSideProps = async (
+//   ctx: GetServerSidePropsContext,
+// ) => {
+//   const session = await getServerAuthSession(ctx)
+
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/login',
+//         permanent: false,
+//       },
+//     }
+//   }
+
+//   return {
+//     props: {
+//       session,
+//     },
+//   }
+// }

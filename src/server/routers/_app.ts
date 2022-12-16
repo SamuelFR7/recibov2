@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { procedure, router } from '../trpc'
+import { procedure, protectedProcedure, router } from '../trpc'
 import { prisma } from '../db/prisma'
 
 export const appRouter = router({
-  getReceipts: procedure.query(async () => {
+  getReceipts: protectedProcedure.query(async () => {
     const allReceipts = await prisma.receipt.findMany({
       include: {
         Farm: {
