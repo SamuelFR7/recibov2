@@ -28,8 +28,8 @@ export function PrintDialog({ children, farms }: ListDialogProps) {
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="bg-modalBg fixed inset-0" />
-        <Dialog.Content className="bg-white rounded-md shadow-header fixed top-1/2 left-1/2 alert-transform w-[90vw] max-w-[45rem] max-h-[85vh] p-6 text-sm">
+        <Dialog.Overlay className="bg-modalBg fixed inset-0 dialog-overlay" />
+        <Dialog.Content className="bg-white rounded-md shadow-header dialog-content fixed top-1/2 left-1/2 alert-transform w-[90vw] max-w-[45rem] max-h-[85vh] p-6 text-sm">
           <Dialog.Title className="text-lg font-semibold">
             Imprimir recibos
           </Dialog.Title>

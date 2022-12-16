@@ -13,8 +13,8 @@ export function Alert({ children, action }: AlertProps) {
     <AlertDialog.Root>
       <AlertDialog.Trigger asChild>{children}</AlertDialog.Trigger>
       <AlertDialog.Portal>
-        <AlertDialog.Overlay className="bg-modalBg fixed inset-0" />
-        <AlertDialog.Content className="bg-white rounded-md shadow-header fixed top-1/2 left-1/2 alert-transform max-w-[50rem] w-full p-6">
+        <AlertDialog.Overlay className="bg-modalBg fixed inset-0 dialog-overlay" />
+        <AlertDialog.Content className="bg-white rounded-md shadow-header dialog-content fixed dialog-content top-1/2 left-1/2 alert-transform max-w-[50rem] w-full p-6">
           <AlertDialog.Title className="m-0 text-md font-bold">
             Você tem certeza disso?
           </AlertDialog.Title>

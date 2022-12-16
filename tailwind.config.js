@@ -7,7 +7,21 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: '"Roboto", Helvetica, Arial, sans-serif '
-    },  
+    },
+    keyframes: {
+      "fade-in": {
+        "0%": { opacity: 0 },
+        "100%": { opacity: 1 },
+      },
+      "fade-out": {
+        "0%": { opacity: 1 },
+        "100%": { opacity: 0 },
+      },
+    },
+    animation: {
+      "fade-out": "fade-out 200ms ease-out",
+      "fade-in": "fade-in 200ms ease-out"
+    },
     fontSize: {
       xsm: '1.16rem',
       sm: ['1.4rem', '1.4rem'],

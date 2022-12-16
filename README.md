@@ -17,4 +17,5 @@
 - [X] Header
 - [X] New print styles
 - [X] Print dialogs
+- [X] Dialogs animation
 - [ ] Authentication
