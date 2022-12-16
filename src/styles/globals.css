@@ -17,4 +17,8 @@
     .alert-transform {
         transform: translate(-50%, -50%);
     }
+
+    .alert-animation {
+        animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)
+    }
 }

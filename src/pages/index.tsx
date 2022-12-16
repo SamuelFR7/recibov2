@@ -7,6 +7,8 @@ import { trpc } from '@/utils/trpc'
 import Link from 'next/link'
 import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
+import { ListDialog } from '@/components/ListDialog'
+import { PrintDialog } from '@/components/PrintDialog'
 
 export default function HomePage() {
   const utils = trpc.useContext()
@@ -15,6 +17,7 @@ export default function HomePage() {
   const [search, setSearch] = useState('')
 
   const receipts = trpc.getReceipts.useQuery()
+  const farms = trpc.getFarms.useQuery()
 
   const deleteMutation = trpc.deleteReceipt.useMutation({
     onSuccess() {
@@ -32,7 +35,8 @@ export default function HomePage() {
     window.open(`/api/receipts/print/unique?id=${id}`)
   }
 
-  if (!receipts.data || receipts.isLoading) return <h1>Loading...</h1>
+  if (!receipts.data || receipts.isLoading || !farms.data)
+    return <h1>Loading...</h1>
 
   const filteredReceipts =
     search.length > 0
@@ -73,10 +77,16 @@ export default function HomePage() {
               <Button size="medium">Adicionar Recibo</Button>
             </Link>
             <div>
-              <Button size="medium">Imprimir Listagem</Button>
+              <ListDialog farms={farms.data}>
+                <Button type="button" size="medium">
+                  Imprimir Listagem
+                </Button>
+              </ListDialog>
             </div>
             <div>
-              <Button size="medium">Imprimir Recibos</Button>
+              <PrintDialog farms={farms.data}>
+                <Button size="medium">Imprimir Recibos</Button>
+              </PrintDialog>
             </div>
           </div>
         </div>
