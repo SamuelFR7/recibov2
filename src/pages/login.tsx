@@ -10,21 +10,21 @@ export default function Login() {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async (
-//   ctx: GetServerSidePropsContext,
-// ) => {
-//   const session = await getServerAuthSession(ctx)
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  const session = await getServerAuthSession(ctx)
 
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: '/',
-//         permanent: false,
-//       },
-//     }
-//   }
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
 
-//   return {
-//     props: {},
-//   }
-// }
+  return {
+    props: {},
+  }
+}

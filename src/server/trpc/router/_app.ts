@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { procedure, protectedProcedure, router } from '../trpc'
-import { prisma } from '../db/prisma'
+import { procedure, protectedProcedure, router } from '@/server/trpc/trpc'
+import { prisma } from '@/server/db/prisma'
 
 export const appRouter = router({
   getReceipts: protectedProcedure.query(async () => {
