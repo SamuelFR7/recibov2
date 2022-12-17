@@ -20,6 +20,6 @@
 - [X] Dialogs animation
 - [X] Authentication
 - [X] Refactor trpc routes
+- [X] Logout button
 - [ ] Style login page
-- [ ] Logout button
 - [ ] Loading component
