@@ -10,6 +10,7 @@ import { trpc } from '@/utils/trpc'
 import { Input } from '@/components/Form/Input'
 import { Container } from '@/components/Container'
 import { Button } from '@/components/Button'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 
 const fetchReceiptSchema = z.object({
   date: z.date().transform((arg) => arg.toISOString().slice(0, 10)),
@@ -207,6 +208,17 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
 export default EditReceipt
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getServerAuthSession(context)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
   const { id } = context.query
 
   const receipt = await getReceipt(id as string)

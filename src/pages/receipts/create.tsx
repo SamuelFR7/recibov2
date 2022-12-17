@@ -7,6 +7,8 @@ import { Container } from '@/components/Container'
 import { Input } from '@/components/Form/Input'
 import { Button } from '@/components/Button'
 import { Select } from '@/components/Form/Select'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 
 const receiptSchema = z.object({
   date: z.string().min(1, { message: 'É preciso uma data' }),
@@ -183,4 +185,25 @@ export default function CreateReceipts() {
       </Container>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  const session = await getServerAuthSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
 }

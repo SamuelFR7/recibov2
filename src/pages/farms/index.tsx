@@ -6,6 +6,8 @@ import { Pencil, Trash } from 'phosphor-react'
 import { Pagination } from '@/components/Pagination'
 import { Alert } from '@/components/Alert'
 import { Input } from '@/components/Form/Input'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 
 export default function FarmsPage() {
   const [page, setPage] = useState(1)
@@ -112,4 +114,25 @@ export default function FarmsPage() {
       </Container>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  const session = await getServerAuthSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
 }

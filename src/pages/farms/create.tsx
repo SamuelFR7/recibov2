@@ -6,6 +6,8 @@ import { trpc } from '@/utils/trpc'
 import { Container } from '@/components/Container'
 import { Input } from '@/components/Form/Input'
 import { Button } from '@/components/Button'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 const farmSchema = z.object({
   name: z.string().min(1, { message: 'É preciso de um nome' }),
@@ -92,4 +94,25 @@ export default function NewFarm() {
       </Container>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  const session = await getServerAuthSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
 }

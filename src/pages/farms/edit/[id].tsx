@@ -13,6 +13,7 @@ import { z } from 'zod'
 import { Container } from '@/components/Container'
 import { Input } from '@/components/Form/Input'
 import { Button } from '@/components/Button'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 
 const farmSchema = z.object({
   name: z.string().min(1, { message: 'É preciso de um nome' }),
@@ -127,6 +128,17 @@ const EditFarm: React.FC<{ farm: FarmAsyncResult }> = ({ farm }) => {
 export default EditFarm
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getServerAuthSession(context)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
   const { id } = context.query
 
   const farm = await getFarm(id as string)

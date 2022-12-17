@@ -1,4 +1,6 @@
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { unstable_getServerSession } from 'next-auth'
 import puppeteer from 'puppeteer'
 
 const saveAsPdf = async (id: string) => {
@@ -20,6 +22,14 @@ const saveAsPdf = async (id: string) => {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await unstable_getServerSession(req, res, authOptions)
+
+  if (!session) {
+    return res.send({
+      message: 'You are not authorized to access this content',
+    })
+  }
+
   const { id } = req.query
 
   res.setHeader('Content-Type', 'application/pdf')
