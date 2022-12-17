@@ -54,7 +54,7 @@ const EditFarm: React.FC<{ farm: FarmAsyncResult }> = ({ farm }) => {
     defaultValues: farm,
   })
 
-  const mutation = trpc.editFarm.useMutation()
+  const mutation = trpc.farms.edit.useMutation()
 
   const handleEditFarm: SubmitHandler<FarmSchemaType> = async (values) => {
     console.log('aqui')

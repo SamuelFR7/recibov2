@@ -18,12 +18,12 @@ export default function HomePage() {
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
 
-  const receipts = trpc.getReceipts.useQuery()
-  const farms = trpc.getFarms.useQuery()
+  const receipts = trpc.receipts.getAll.useQuery()
+  const farms = trpc.farms.getAll.useQuery()
 
-  const deleteMutation = trpc.deleteReceipt.useMutation({
+  const deleteMutation = trpc.receipts.delete.useMutation({
     onSuccess() {
-      utils.getReceipts.invalidate()
+      utils.receipts.getAll.invalidate()
     },
   })
 

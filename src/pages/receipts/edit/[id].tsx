@@ -89,7 +89,7 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
     defaultValues: receipt,
   })
 
-  const mutation = trpc.editReceipt.useMutation()
+  const mutation = trpc.receipts.edit.useMutation()
 
   const handleEditReceipt: SubmitHandler<ReceiptAsyncResult> = async (
     values,

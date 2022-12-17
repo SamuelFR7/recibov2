@@ -37,9 +37,9 @@ export default function CreateReceipts() {
     resolver: zodResolver(receiptSchema),
   })
 
-  const mutation = trpc.createReceipt.useMutation()
+  const mutation = trpc.receipts.create.useMutation()
 
-  const farms = trpc.getFarms.useQuery()
+  const farms = trpc.farms.getAll.useQuery()
 
   const handleCreateReceipt: SubmitHandler<ReceiptSchemaType> = async (
     values,

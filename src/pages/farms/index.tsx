@@ -12,11 +12,11 @@ export default function FarmsPage() {
   const [farmsPerPage, setFarmsPerPage] = useState(10)
   const [search, setSearch] = useState('')
   const utils = trpc.useContext()
-  const farms = trpc.getFarms.useQuery()
+  const farms = trpc.farms.getAll.useQuery()
 
-  const deleteFarm = trpc.deleteFarm.useMutation({
+  const deleteFarm = trpc.farms.delete.useMutation({
     onSuccess() {
-      utils.getFarms.invalidate()
+      utils.farms.getAll.invalidate()
     },
   })
 

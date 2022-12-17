@@ -26,7 +26,7 @@ export default function NewFarm() {
     resolver: zodResolver(farmSchema),
   })
 
-  const mutation = trpc.createFarm.useMutation()
+  const mutation = trpc.farms.create.useMutation()
 
   const handleCreateFarm: SubmitHandler<FarmSchemaType> = async (values) => {
     mutation.mutate({
