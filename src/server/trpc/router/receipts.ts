@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { procedure, router } from '../trpc'
-import { prisma } from '../db/prisma'
+import { protectedProcedure, router } from '@/server/trpc/trpc'
+import { prisma } from '@/server/db/prisma'
 
-export const appRouter = router({
-  getReceipts: procedure.query(async () => {
+export const receiptsRouter = router({
+  getAll: protectedProcedure.query(async () => {
     const allReceipts = await prisma.receipt.findMany({
       include: {
         Farm: {
@@ -16,7 +16,7 @@ export const appRouter = router({
 
     return allReceipts
   }),
-  createReceipt: procedure
+  create: protectedProcedure
     .input(
       z.object({
         date: z.string().transform((arg) => new Date(arg)),
@@ -49,7 +49,7 @@ export const appRouter = router({
 
       return newReceipt
     }),
-  editReceipt: procedure
+  edit: protectedProcedure
     .input(
       z.object({
         id: z.string(),
@@ -84,7 +84,7 @@ export const appRouter = router({
 
       return editedReceipt
     }),
-  deleteReceipt: procedure
+  delete: protectedProcedure
     .input(
       z.object({
         id: z.string(),
@@ -99,87 +99,4 @@ export const appRouter = router({
 
       return deletedReceipt
     }),
-  getFarms: procedure.query(async () => {
-    const allFarms = await prisma.farm.findMany({})
-
-    return allFarms
-  }),
-  getFarmById: procedure
-    .input(
-      z.object({
-        id: z.string(),
-      }),
-    )
-    .query(async ({ input }) => {
-      const farm = await prisma.farm.findUnique({
-        where: {
-          id: input.id,
-        },
-      })
-
-      return farm
-    }),
-  createFarm: procedure
-    .input(
-      z.object({
-        name: z.string(),
-        payerName: z.string().nullable(),
-        payerAddress: z.string().nullable(),
-        payerDocument: z.string().nullable(),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const newFarm = await prisma.farm.create({
-        data: {
-          name: input.name.toUpperCase(),
-          payerName: input.payerName?.toUpperCase(),
-          payerAddress: input.payerAddress?.toUpperCase(),
-          payerDocument: input.payerDocument?.toUpperCase(),
-        },
-      })
-
-      return newFarm
-    }),
-  editFarm: procedure
-    .input(
-      z.object({
-        id: z.string(),
-        name: z.string(),
-        payerName: z.string().nullable(),
-        payerAddress: z.string().nullable(),
-        payerDocument: z.string().nullable(),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const editedFarm = await prisma.farm.update({
-        where: {
-          id: input.id,
-        },
-        data: {
-          name: input.name.toUpperCase(),
-          payerName: input.payerName?.toUpperCase(),
-          payerAddress: input.payerAddress?.toUpperCase(),
-          payerDocument: input.payerDocument?.toUpperCase(),
-        },
-      })
-
-      return editedFarm
-    }),
-  deleteFarm: procedure
-    .input(
-      z.object({
-        id: z.string(),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const deletedFarm = await prisma.farm.delete({
-        where: {
-          id: input.id,
-        },
-      })
-
-      return deletedFarm
-    }),
 })
-
-export type AppRouter = typeof appRouter

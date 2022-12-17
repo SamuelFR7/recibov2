@@ -18,4 +18,8 @@
 - [X] New print styles
 - [X] Print dialogs
 - [X] Dialogs animation
-- [ ] Authentication
+- [X] Authentication
+- [X] Refactor trpc routes
+- [X] Logout button
+- [ ] Style login page
+- [ ] Loading component

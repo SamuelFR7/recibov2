@@ -9,6 +9,8 @@ import { Pencil, Printer, Trash } from 'phosphor-react'
 import { useState } from 'react'
 import { ListDialog } from '@/components/ListDialog'
 import { PrintDialog } from '@/components/PrintDialog'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 export default function HomePage() {
   const utils = trpc.useContext()
@@ -16,12 +18,12 @@ export default function HomePage() {
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
 
-  const receipts = trpc.getReceipts.useQuery()
-  const farms = trpc.getFarms.useQuery()
+  const receipts = trpc.receipts.getAll.useQuery()
+  const farms = trpc.farms.getAll.useQuery()
 
-  const deleteMutation = trpc.deleteReceipt.useMutation({
+  const deleteMutation = trpc.receipts.delete.useMutation({
     onSuccess() {
-      utils.getReceipts.invalidate()
+      utils.receipts.getAll.invalidate()
     },
   })
 
@@ -145,4 +147,25 @@ export default function HomePage() {
       </Container>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  const session = await getServerAuthSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
 }

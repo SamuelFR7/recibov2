@@ -6,17 +6,19 @@ import { Pencil, Trash } from 'phosphor-react'
 import { Pagination } from '@/components/Pagination'
 import { Alert } from '@/components/Alert'
 import { Input } from '@/components/Form/Input'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 
 export default function FarmsPage() {
   const [page, setPage] = useState(1)
   const [farmsPerPage, setFarmsPerPage] = useState(10)
   const [search, setSearch] = useState('')
   const utils = trpc.useContext()
-  const farms = trpc.getFarms.useQuery()
+  const farms = trpc.farms.getAll.useQuery()
 
-  const deleteFarm = trpc.deleteFarm.useMutation({
+  const deleteFarm = trpc.farms.delete.useMutation({
     onSuccess() {
-      utils.getFarms.invalidate()
+      utils.farms.getAll.invalidate()
     },
   })
 
@@ -112,4 +114,25 @@ export default function FarmsPage() {
       </Container>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext,
+) => {
+  const session = await getServerAuthSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      session,
+    },
+  }
 }
