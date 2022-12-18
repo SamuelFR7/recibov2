@@ -23,3 +23,4 @@
 - [X] Logout button
 - [ ] Style login page
 - [ ] Loading component
+- [ ] Fix pdf in production
