@@ -2,12 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 import puppeteer from 'puppeteer'
 import { authOptions } from '../../auth/[...nextauth]'
-import chrome from 'chrome-aws-lambda'
 
 const saveAsPdf = async (id: string) => {
-  const browser = await puppeteer.launch({
-    executablePath: await chrome.executablePath,
-  })
+  const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
   await page.goto(`http://localhost:3000/receipts/print/unique/${id}`, {
