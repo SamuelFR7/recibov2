@@ -24,6 +24,7 @@ export default function NewFarm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FarmSchemaType>({
     resolver: zodResolver(farmSchema),
@@ -32,6 +33,12 @@ export default function NewFarm() {
   const mutation = trpc.farms.create.useMutation({
     onSuccess() {
       utils.farms.getAll.invalidate()
+      router.push('/farms')
+    },
+    onError() {
+      setError('name', {
+        message: 'Já existe uma fazenda com este nome',
+      })
     },
   })
 
@@ -39,8 +46,6 @@ export default function NewFarm() {
     mutation.mutate({
       ...values,
     })
-
-    router.push('/farms')
   }
 
   return (

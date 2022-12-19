@@ -44,6 +44,7 @@ type FarmAsyncResult = AsyncReturnType<typeof getFarm>
 
 const EditFarm: React.FC<{ farm: FarmAsyncResult }> = ({ farm }) => {
   const router = useRouter()
+  const utils = trpc.useContext()
   const { id } = router.query
 
   const {
@@ -55,16 +56,18 @@ const EditFarm: React.FC<{ farm: FarmAsyncResult }> = ({ farm }) => {
     defaultValues: farm,
   })
 
-  const mutation = trpc.farms.edit.useMutation()
+  const mutation = trpc.farms.edit.useMutation({
+    onSuccess() {
+      utils.farms.getAll.invalidate()
+      router.push('/farms')
+    },
+  })
 
   const handleEditFarm: SubmitHandler<FarmSchemaType> = async (values) => {
-    console.log('aqui')
     mutation.mutate({
       id: String(id),
       ...values,
     })
-
-    router.push('/farms')
   }
 
   return (

@@ -1,5 +1,7 @@
 ## TODO
 
+
+### Main
 - [X] Pdf generate
 - [X] Print multiples receipts
 - [X] Print receipts list by farm
@@ -25,3 +27,7 @@
 - [X] Redirect to login page
 - [X] Loading component
 - [X] Print multiple receipts of all farms
+
+### Adjustments
+- [X] Not allow to submit an farm form with a already existed farm name
+- [ ] Font size of pdfkit-table

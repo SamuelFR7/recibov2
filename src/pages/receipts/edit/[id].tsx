@@ -80,6 +80,7 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
   receipt,
 }) => {
   const router = useRouter()
+  const utils = trpc.useContext()
   const { id } = router.query
   const {
     register,
@@ -90,7 +91,12 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
     defaultValues: receipt,
   })
 
-  const mutation = trpc.receipts.edit.useMutation()
+  const mutation = trpc.receipts.edit.useMutation({
+    onSuccess() {
+      utils.receipts.getAll.invalidate()
+      router.push('/')
+    },
+  })
 
   const handleEditReceipt: SubmitHandler<ReceiptAsyncResult> = async (
     values,
@@ -99,7 +105,6 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
       id: id as string,
       ...values,
     })
-    router.push('/')
   }
 
   return (

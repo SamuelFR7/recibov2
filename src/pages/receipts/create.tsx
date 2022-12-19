@@ -29,6 +29,7 @@ const receiptSchema = z.object({
 type ReceiptSchemaType = z.infer<typeof receiptSchema>
 
 export default function CreateReceipts() {
+  const utils = trpc.useContext()
   const router = useRouter()
   const {
     register,
@@ -39,7 +40,12 @@ export default function CreateReceipts() {
     resolver: zodResolver(receiptSchema),
   })
 
-  const mutation = trpc.receipts.create.useMutation()
+  const mutation = trpc.receipts.create.useMutation({
+    onSuccess() {
+      utils.receipts.getAll.invalidate()
+      router.push('/')
+    },
+  })
 
   const farms = trpc.farms.getAll.useQuery()
 
@@ -49,8 +55,6 @@ export default function CreateReceipts() {
     mutation.mutate({
       ...values,
     })
-
-    router.push('/')
   }
 
   if (!farms.data || farms.isLoading)
