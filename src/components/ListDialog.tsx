@@ -25,7 +25,7 @@ export function ListDialog({ children, farms }: ListDialogProps) {
       return setIsOpen(false)
     }
 
-    window.open(`/api/receipts/print/list/by-farm?id=${farmToPrint}`)
+    window.open(`/api/receipts/print/list/by-farm/${farmToPrint}`)
     setFarmToPrint(0)
     return setIsOpen(false)
   }
