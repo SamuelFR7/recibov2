@@ -31,3 +31,5 @@
 ### Adjustments
 - [X] Not allow to submit an farm form with a already existed farm name
 - [ ] Font size of pdfkit-table
+- [ ] Custom favicon
+- [ ] Head title
