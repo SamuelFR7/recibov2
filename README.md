@@ -21,6 +21,6 @@
 - [X] Authentication
 - [X] Refactor trpc routes
 - [X] Logout button
+- [ ] Fix pdf in production
 - [ ] Style login page
 - [ ] Loading component
-- [ ] Fix pdf in production
