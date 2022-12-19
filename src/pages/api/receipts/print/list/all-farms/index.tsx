@@ -80,8 +80,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
 
     const table = {
-      title: 'Listagem de recibos',
-      subtitle: `Fazenda: ${farm.name}`,
       headers: ['Data', 'Numero', 'Beneficiário', 'CPF/CNPJ', 'Valor'],
       rows: tableRows,
     }
@@ -89,7 +87,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (index !== 0) {
       pdfDoc.moveDown()
     }
-    pdfDoc.table(table)
+    pdfDoc.table(table, {
+      prepareHeader: () => pdfDoc.fontSize(12),
+      prepareRow: () => pdfDoc.fontSize(10),
+      title: {
+        label: 'Listagem dos recibos',
+        fontSize: 16,
+      },
+      subtitle: {
+        label: `Fazenda: ${farm.name}`,
+        fontSize: 10,
+      },
+    })
   })
 
   res.setHeader('Content-Type', 'application/pdf')

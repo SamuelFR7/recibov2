@@ -32,4 +32,4 @@
 - [X] Not allow to submit an farm form with a already existed farm name
 - [X] Head title
 - [X] Custom favicon
-- [ ] Font size of pdfkit-table
+- [X] Font size of pdfkit-table
