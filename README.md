@@ -24,3 +24,4 @@
 - [X] Implement PDFKit
 - [X] Redirect to login page
 - [X] Loading component
+- [ ] Print multiple receipts of all farms
