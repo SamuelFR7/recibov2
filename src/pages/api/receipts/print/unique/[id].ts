@@ -109,10 +109,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       380,
     )
 
-  pdfDoc
-    .moveTo(150, 390)
-    .lineTo(550, 390) // draw another line
-    .stroke()
+  pdfDoc.moveTo(150, 390).lineTo(550, 390).stroke()
 
   pdfDoc.text(`${receipt.recipientName}`, 300, 395)
 

@@ -19,7 +19,7 @@ export function PrintDialog({ children, farms }: ListDialogProps) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
 
-    window.open(`/api/receipts/print/by-farm?id=${farmToPrint}`)
+    window.open(`/api/receipts/print/by-farm/${farmToPrint}`)
     setFarmToPrint(0)
     return setIsOpen(false)
   }
