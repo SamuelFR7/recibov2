@@ -6,11 +6,14 @@ import PDFDocument from 'pdfkit'
 import { z } from 'zod'
 
 async function getReceipt(id: string) {
-  const receipts = await prisma.receipt.findMany({
-    where: {
-      farmId: id,
-    },
-  })
+  const receipts =
+    id !== '0'
+      ? await prisma.receipt.findMany({
+          where: {
+            farmId: id,
+          },
+        })
+      : await prisma.receipt.findMany()
 
   const receiptSchema = z.object({
     date: z.date().transform((arg) => arg.toISOString().slice(0, 10)),
