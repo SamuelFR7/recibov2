@@ -34,7 +34,7 @@ export default function HomePage() {
   }
 
   function handlePrint(id: string) {
-    window.open(`/api/receipts/print/unique?id=${id}`)
+    window.open(`/api/receipts/print/unique/${id}`)
   }
 
   if (!receipts.data || receipts.isLoading || !farms.data)
