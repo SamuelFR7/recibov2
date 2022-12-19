@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prod:postinstall": "yarn prisma migrate deploy"
+    "postinstall": "yarn prisma migrate deploy"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
