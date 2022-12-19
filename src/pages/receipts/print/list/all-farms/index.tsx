@@ -63,9 +63,9 @@ const Print: React.FC<{ farms: FarmQueryResult }> = ({ farms }) => {
       <div className="p-[42px]">
         <div className="flex flex-col">
           <h2 className="text-lg">Listagem dos recibos</h2>
-          {farms.map(({ name, id, receipts }) => (
+          {farms.map(({ name, id, receipts }, index) => (
             <>
-              <div>
+              <div key={index}>
                 <div className="mt-[20px]">
                   <div className="flex text-md gap-2">
                     <h2 className="font-semibold">Fazenda:</h2>
