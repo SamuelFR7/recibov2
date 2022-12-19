@@ -53,7 +53,12 @@ export default function CreateReceipts() {
     router.push('/')
   }
 
-  if (!farms.data || farms.isLoading) return <h1>Loading...</h1>
+  if (!farms.data || farms.isLoading)
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <img src="/loader.svg" alt="Loader" />
+      </div>
+    )
 
   function setPayerData(value: string) {
     const selectedFarm = farms.data?.find((farm) => {

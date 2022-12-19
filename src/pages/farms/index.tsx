@@ -28,7 +28,12 @@ export default function FarmsPage() {
     })
   }
 
-  if (!farms.data || farms.isLoading) return <h1>Loading...</h1>
+  if (!farms.data || farms.isLoading)
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <img src="/loader.svg" alt="Loader" />
+      </div>
+    )
 
   const filteredFarms =
     search.length > 0

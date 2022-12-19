@@ -37,8 +37,14 @@ export default function HomePage() {
     window.open(`/api/receipts/print/unique/${id}`)
   }
 
-  if (!receipts.data || receipts.isLoading || !farms.data)
-    return <h1>Loading...</h1>
+  const dataLoading = !receipts.data || receipts.isLoading || !farms.data
+
+  if (dataLoading)
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <img src="/loader.svg" alt="Loader" />
+      </div>
+    )
 
   const filteredReceipts =
     search.length > 0

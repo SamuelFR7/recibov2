@@ -1,13 +1,14 @@
-import LoginBtn from '@/components/login-btn'
 import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { signIn } from 'next-auth/react'
+import { useEffect } from 'react'
 
 export default function Login() {
-  return (
-    <form>
-      <LoginBtn />
-    </form>
-  )
+  useEffect(() => {
+    signIn('auth0')
+  }, [])
+
+  return <div></div>
 }
 
 export const getServerSideProps: GetServerSideProps = async (
