@@ -19,6 +19,7 @@ const farmSchema = z.object({
 type FarmSchemaType = z.infer<typeof farmSchema>
 
 export default function NewFarm() {
+  const utils = trpc.useContext()
   const router = useRouter()
   const {
     register,
@@ -28,7 +29,11 @@ export default function NewFarm() {
     resolver: zodResolver(farmSchema),
   })
 
-  const mutation = trpc.farms.create.useMutation()
+  const mutation = trpc.farms.create.useMutation({
+    onSuccess() {
+      utils.farms.getAll.invalidate()
+    },
+  })
 
   const handleCreateFarm: SubmitHandler<FarmSchemaType> = async (values) => {
     mutation.mutate({
