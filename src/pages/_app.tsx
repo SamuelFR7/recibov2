@@ -2,18 +2,25 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { trpc } from '@/utils/trpc'
 import { Header } from '@/components/Header'
-import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'
+import { Session, SessionContextProvider } from '@supabase/auth-helpers-react'
+import { useState } from 'react'
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps<{ initialSession: Session }>) {
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
+
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionContextProvider
+      supabaseClient={supabaseClient}
+      initialSession={pageProps.initialSession}
+    >
       <Head>
         <title>Recibo</title>
       </Head>
       <Header />
       <Component {...pageProps} />
-    </SessionProvider>
+    </SessionContextProvider>
   )
 }
 

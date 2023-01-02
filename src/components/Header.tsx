@@ -1,11 +1,21 @@
-import { signOut, useSession } from 'next-auth/react'
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { useSession } from '@supabase/auth-helpers-react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { SignOut } from 'phosphor-react'
 import { Container } from './Container'
 import { NavItem } from './NavItem'
 
 export function Header() {
-  const { data: session } = useSession()
+  const router = useRouter()
+  const session = useSession()
+  const supabase = createBrowserSupabaseClient()
+
+  async function handleSignOut() {
+    await supabase.auth.signOut()
+
+    router.push('/login')
+  }
 
   return (
     <header className="w-full bg-primary">
@@ -21,7 +31,7 @@ export function Header() {
               <NavItem href="/farms" title="Fazendas" />
             </nav>
             <button
-              onClick={() => signOut()}
+              onClick={handleSignOut}
               className="ml-auto flex items-center text-white hover:text-text text-sm gap-3 font-semibold"
             >
               <SignOut weight="bold" className="w-5 h-5" />
