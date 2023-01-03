@@ -25,7 +25,7 @@ export default function SignIn() {
 
   const handleSend: SubmitHandler<SendMailType> = async (values) => {
     await supabase.auth.resetPasswordForEmail(values.email, {
-      redirectTo: 'http://localhost:3000/auth/recovery/reset',
+      redirectTo: `${process.env.NEXT_PUBLIC_VERCEL_URL}/auth/recovery/reset`,
     })
   }
 
