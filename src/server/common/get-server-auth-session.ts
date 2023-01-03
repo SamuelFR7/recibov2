@@ -1,12 +1,11 @@
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { GetServerSidePropsContext } from 'next'
+import { type GetServerSidePropsContext } from 'next'
+import { unstable_getServerSession } from 'next-auth'
 
-export const getServerAuthSession = async (ctx: GetServerSidePropsContext) => {
-  const supabase = createServerSupabaseClient(ctx)
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  return session
+export const getServerAuthSession = async (ctx: {
+  req: GetServerSidePropsContext['req']
+  res: GetServerSidePropsContext['res']
+}) => {
+  return await unstable_getServerSession(ctx.req, ctx.res, authOptions)
 }

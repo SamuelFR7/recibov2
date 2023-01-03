@@ -1,4 +1,4 @@
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { SignOut } from 'phosphor-react'
@@ -7,10 +7,9 @@ import { NavItem } from './NavItem'
 
 export function Header() {
   const router = useRouter()
-  const supabase = createBrowserSupabaseClient()
 
   async function handleSignOut() {
-    await supabase.auth.signOut()
+    await signOut()
 
     router.push('/auth/signin')
   }

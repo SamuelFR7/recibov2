@@ -3,15 +3,18 @@ import { Input } from '@/components/Form/Input'
 import { Loader } from '@/components/assets/Loader'
 import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { signIn } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const loginSchema = z.object({
-  email: z.string().email({ message: 'Digite um email válido' }),
-  password: z.string(),
+  username: z.string(),
+  password: z
+    .string()
+    .min(6, { message: 'A senha deve conter ao menos seis caractéres' }),
 })
 
 type LoginSchema = z.infer<typeof loginSchema>
@@ -27,26 +30,22 @@ export default function SignIn() {
     resolver: zodResolver(loginSchema),
   })
 
-  const supabase = createBrowserSupabaseClient()
-
   const handleSignIn: SubmitHandler<LoginSchema> = async (values) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: values.email,
-      password: values.password,
-    })
+    await signIn('credentials', { ...values, callbackUrl: '/' })
+  }
+
+  useEffect(() => {
+    const { error } = router.query
 
     if (error) {
-      setError('email', {
+      setError('username', {
         message: 'Usuário ou senha incorretos',
       })
-
-      return setError('password', {
+      setError('password', {
         message: 'Usuário ou senha incorretos',
       })
     }
-
-    return router.push('/')
-  }
+  }, [router, setError])
 
   return (
     <div className="flex w-full h-screen items-center justify-center">
@@ -62,9 +61,9 @@ export default function SignIn() {
               onSubmit={handleSubmit(handleSignIn)}
             >
               <Input
-                {...register('email')}
-                error={errors.email}
-                label="Email"
+                {...register('username')}
+                error={errors.username}
+                label="Usuário"
                 placeholder="johndoe@mail.com"
               />
               <Input
