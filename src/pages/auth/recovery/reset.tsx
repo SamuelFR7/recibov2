@@ -6,6 +6,7 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useUser } from '@supabase/auth-helpers-react'
 
 const resetSchema = z
   .object({
@@ -24,6 +25,7 @@ const resetSchema = z
 type ResetSchemaType = z.infer<typeof resetSchema>
 
 export default function SignIn() {
+  const user = useUser()
   const router = useRouter()
   const {
     handleSubmit,
@@ -36,10 +38,6 @@ export default function SignIn() {
   const supabase = createBrowserSupabaseClient()
 
   const handleReset: SubmitHandler<ResetSchemaType> = async (values) => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-
     await supabase.auth.updateUser({
       email: user?.email,
       password: values.password,
