@@ -90,12 +90,6 @@ export default function SignIn() {
                 </Button>
               </div>
             </form>
-            <a
-              href="/auth/recovery/send-email"
-              className="text-sm text-gray-text text-center hover:text-text"
-            >
-              Esqueceu a senha?
-            </a>
           </div>
         </div>
       </div>
