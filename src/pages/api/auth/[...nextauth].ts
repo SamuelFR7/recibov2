@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('User or password are incorrects')
         }
 
-        const isValidpassword = compare(creds.password, user.password)
+        const isValidpassword = await compare(creds.password, user.password)
 
         if (!isValidpassword) {
           throw new Error('User or password are incorrects')
