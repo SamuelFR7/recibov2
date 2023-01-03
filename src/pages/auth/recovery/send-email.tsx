@@ -30,10 +30,6 @@ export default function SignIn() {
     })
   }
 
-  useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
-  }, [])
-
   return (
     <div className="flex w-full h-screen items-center justify-center">
       <div className="w-[33.7rem] rounded-lg bg-white shadow-header">
