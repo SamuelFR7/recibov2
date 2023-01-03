@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useEffect } from 'react'
 
 const sendMail = z.object({
   email: z.string().email({ message: 'Digite um email válido' }),
@@ -28,6 +29,10 @@ export default function SignIn() {
       redirectTo: `${process.env.NEXT_PUBLIC_VERCEL_URL}/auth/recovery/reset`,
     })
   }
+
+  useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
+  }, [])
 
   return (
     <div className="flex w-full h-screen items-center justify-center">
