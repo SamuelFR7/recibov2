@@ -1,7 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority'
 import { ButtonHTMLAttributes } from 'react'
 
-const buttonClasses = cva('rounded-md font-semibold', {
+const buttonClasses = cva('rounded-md disabled:cursor-not-allowed', {
   variants: {
     variant: {
       primary: 'bg-primary hover:bg-primaryHover text-white',
@@ -17,10 +17,16 @@ const buttonClasses = cva('rounded-md font-semibold', {
       small: 'text-sm',
       medium: 'text-md',
     },
+    fontWeight: {
+      regular: 'font-normal',
+      medium: 'font-medium',
+      bold: 'font-bold',
+    },
   },
   defaultVariants: {
     variant: 'primary',
-    font: 'small',
+    font: 'medium',
+    fontWeight: 'medium',
   },
 })
 

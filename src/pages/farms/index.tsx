@@ -69,7 +69,7 @@ export default function FarmsPage() {
             </div>
           </div>
           <Link href="/farms/create">
-            <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
+            <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-medium">
               Adicionar Fazenda
             </button>
           </Link>

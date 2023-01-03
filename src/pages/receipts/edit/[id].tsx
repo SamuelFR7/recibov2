@@ -111,7 +111,7 @@ const EditReceipt: React.FC<{ receipt: ReceiptAsyncResult }> = ({
     <div>
       <Container classNames="mt-[10rem] text-sm">
         <div className="flex flex-col w-full bg-white rounded-md shadow-header">
-          <h1 className="text-md p-5 font-semibold">Editar recibo</h1>
+          <h1 className="text-md p-5 font-medium">Editar recibo</h1>
           <form
             onSubmit={handleSubmit(handleEditReceipt)}
             className="flex w-full flex-col gap-4 px-5 pb-5"

@@ -83,7 +83,7 @@ export default function CreateReceipts() {
     <div>
       <Container classNames="mt-[10rem] text-sm">
         <div className="flex flex-col w-full bg-white rounded-md shadow-header">
-          <h1 className="text-md p-5 font-semibold">Novo recibo</h1>
+          <h1 className="text-md p-5 font-medium">Novo recibo</h1>
           <form
             onSubmit={handleSubmit(handleCreateReceipt)}
             className="flex w-full flex-col gap-4 px-5 pb-5"
