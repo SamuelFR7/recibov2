@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { ListDialog } from '@/components/ListDialog'
 import { PrintDialog } from '@/components/PrintDialog'
 import { getServerAuthSession } from '@/server/common/get-server-auth-session'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { GetServerSideProps } from 'next'
 
 export default function HomePage() {
   const utils = trpc.useContext()
@@ -86,9 +86,7 @@ export default function HomePage() {
             </Link>
             <div>
               <ListDialog farms={farms.data}>
-                <Button type="button" size="medium">
-                  Imprimir Listagem
-                </Button>
+                <Button size="medium">Imprimir Listagem</Button>
               </ListDialog>
             </div>
             <div>
@@ -155,9 +153,7 @@ export default function HomePage() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getServerAuthSession(ctx)
 
   if (!session) {

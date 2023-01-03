@@ -3,26 +3,20 @@ import type { AppProps } from 'next/app'
 import { trpc } from '@/utils/trpc'
 import { Header } from '@/components/Header'
 import Head from 'next/head'
-import { Session, SessionContextProvider } from '@supabase/auth-helpers-react'
-import { useState } from 'react'
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/router'
+import { SessionProvider } from 'next-auth/react'
 
-function App({ Component, pageProps }: AppProps<{ initialSession: Session }>) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter()
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
 
   return (
-    <SessionContextProvider
-      supabaseClient={supabaseClient}
-      initialSession={pageProps.initialSession}
-    >
+    <SessionProvider session={session}>
       <Head>
         <title>Recibo</title>
       </Head>
       {!router.asPath.startsWith('/auth/') && <Header />}
       <Component {...pageProps} />
-    </SessionContextProvider>
+    </SessionProvider>
   )
 }
 

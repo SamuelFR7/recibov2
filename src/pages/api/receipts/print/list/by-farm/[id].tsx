@@ -2,7 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '@/server/db/prisma'
 import PDFDocument from 'pdfkit-table'
 import { z } from 'zod'
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
 async function getReceipt(id: string) {
   const receipts = await prisma.receipt.findMany({
@@ -37,10 +38,7 @@ async function getReceipt(id: string) {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const supabase = createServerSupabaseClient({ req, res })
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+  const session = await unstable_getServerSession(req, res, authOptions)
 
   if (!session) {
     return res.send({
