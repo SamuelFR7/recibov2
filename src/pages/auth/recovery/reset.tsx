@@ -1,20 +1,27 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Form/Input'
 import { Loader } from '@/components/assets/Loader'
-import { getServerAuthSession } from '@/server/common/get-server-auth-session'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const loginSchema = z.object({
-  email: z.string().email({ message: 'Digite um email válido' }),
-  password: z.string(),
-})
+const resetSchema = z
+  .object({
+    password: z.string().min(6),
+    passwordConfirmation: z.string().min(6),
+  })
+  .superRefine(({ password, passwordConfirmation }, ctx) => {
+    if (password !== passwordConfirmation) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'As senhas devem ser iguais',
+      })
+    }
+  })
 
-type LoginSchema = z.infer<typeof loginSchema>
+type ResetSchemaType = z.infer<typeof resetSchema>
 
 export default function SignIn() {
   const router = useRouter()
@@ -22,28 +29,21 @@ export default function SignIn() {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-    setError,
-  } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<ResetSchemaType>({
+    resolver: zodResolver(resetSchema),
   })
 
   const supabase = createBrowserSupabaseClient()
 
-  const handleSignIn: SubmitHandler<LoginSchema> = async (values) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: values.email,
+  const handleReset: SubmitHandler<ResetSchemaType> = async (values) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    await supabase.auth.updateUser({
+      email: user?.email,
       password: values.password,
     })
-
-    if (error) {
-      setError('email', {
-        message: 'Usuário ou senha incorretos',
-      })
-
-      return setError('password', {
-        message: 'Usuário ou senha incorretos',
-      })
-    }
 
     return router.push('/')
   }
@@ -59,18 +59,19 @@ export default function SignIn() {
             <div className="h-[1px] bg-gray" />
             <form
               className="flex flex-col gap-2"
-              onSubmit={handleSubmit(handleSignIn)}
+              onSubmit={handleSubmit(handleReset)}
             >
-              <Input
-                {...register('email')}
-                error={errors.email}
-                label="Email"
-                placeholder="johndoe@mail.com"
-              />
               <Input
                 {...register('password')}
                 error={errors.password}
                 label="Senha"
+                placeholder="123456"
+                type="password"
+              />
+              <Input
+                {...register('passwordConfirmation')}
+                error={errors.passwordConfirmation}
+                label="Confirmar senha"
                 type="password"
                 placeholder="123456"
               />
@@ -91,34 +92,9 @@ export default function SignIn() {
                 </Button>
               </div>
             </form>
-            <a
-              href="/auth/recovery/send-email"
-              className="text-sm text-gray-text text-center hover:text-text"
-            >
-              Esqueceu a senha?
-            </a>
           </div>
         </div>
       </div>
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-) => {
-  const session = await getServerAuthSession(ctx)
-
-  if (session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {},
-  }
 }
