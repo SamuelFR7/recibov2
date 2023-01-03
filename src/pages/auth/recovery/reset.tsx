@@ -8,19 +8,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useUser } from '@supabase/auth-helpers-react'
 
-const resetSchema = z
-  .object({
-    password: z.string().min(6),
-    passwordConfirmation: z.string().min(6),
-  })
-  .superRefine(({ password, passwordConfirmation }, ctx) => {
-    if (password !== passwordConfirmation) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'As senhas devem ser iguais',
-      })
-    }
-  })
+const resetSchema = z.object({
+  password: z
+    .string()
+    .min(6, { message: 'Sua senha deve conter ao menos 6 caractéres' }),
+})
 
 type ResetSchemaType = z.infer<typeof resetSchema>
 
@@ -52,7 +44,7 @@ export default function SignIn() {
         <div className="flex flex-col gap-3 px-5 py-4">
           <h1 className="text-2xl">Recibo</h1>
 
-          <p className="text-sm text-gray-text">Entrar agora</p>
+          <p className="text-sm text-gray-text">Recuperar senha</p>
           <div className="flex flex-col gap-4">
             <div className="h-[1px] bg-gray" />
             <form
@@ -62,16 +54,9 @@ export default function SignIn() {
               <Input
                 {...register('password')}
                 error={errors.password}
-                label="Senha"
+                label="Nova senha"
                 placeholder="123456"
                 type="password"
-              />
-              <Input
-                {...register('passwordConfirmation')}
-                error={errors.passwordConfirmation}
-                label="Confirmar senha"
-                type="password"
-                placeholder="123456"
               />
               <div className="mt-3 w-full">
                 <Button
@@ -85,7 +70,7 @@ export default function SignIn() {
                       <Loader width="30" height="30" />
                     </div>
                   ) : (
-                    <span>Entrar</span>
+                    <span>Salvar nova senha</span>
                   )}
                 </Button>
               </div>

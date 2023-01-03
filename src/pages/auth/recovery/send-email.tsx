@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 const sendMail = z.object({
-  email: z.string().email(),
+  email: z.string().email({ message: 'Digite um email válido' }),
 })
 
 type SendMailType = z.infer<typeof sendMail>

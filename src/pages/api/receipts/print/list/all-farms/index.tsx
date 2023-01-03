@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { unstable_getServerSession } from 'next-auth'
-import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { prisma } from '@/server/db/prisma'
 import PDFDocument from 'pdfkit-table'
 import { z } from 'zod'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 const receiptsSchema = z
   .object({
@@ -46,7 +45,10 @@ const getFarms = async () => {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const supabase = createServerSupabaseClient({ req, res })
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) {
     return res.send({
@@ -91,7 +93,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       prepareHeader: () => pdfDoc.fontSize(12),
       prepareRow: () => pdfDoc.fontSize(10),
       title: {
-        label: 'Listagem dos recibos',
+        label: 'Listagem de recibos',
         fontSize: 16,
       },
       subtitle: {

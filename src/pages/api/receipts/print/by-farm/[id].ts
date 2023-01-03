@@ -37,7 +37,9 @@ async function getReceipt(id: string) {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const supabase = createServerSupabaseClient({ req, res })
-  const session = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) {
     return res.send({

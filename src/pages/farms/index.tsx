@@ -71,7 +71,7 @@ export default function FarmsPage() {
           </div>
           <Link href="/farms/create">
             <Button type="button" size="medium">
-              Imprimir Listagem
+              Adicionar Fazenda
             </Button>
           </Link>
         </div>
@@ -130,7 +130,7 @@ export const getServerSideProps: GetServerSideProps = async (
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/auth/signin',
         permanent: false,
       },
     }
