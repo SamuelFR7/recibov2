@@ -8,6 +8,7 @@ import { Alert } from '@/components/Alert'
 import { Input } from '@/components/Form/Input'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { getServerAuthSession } from '@/server/common/get-server-auth-session'
+import { Button } from '@/components/Button'
 
 export default function FarmsPage() {
   const [page, setPage] = useState(1)
@@ -44,7 +45,7 @@ export default function FarmsPage() {
 
   return (
     <div>
-      <Container classNames="mt-[10rem] shadow-header">
+      <Container classNames="mt-[8rem] shadow-header">
         <div className="bg-white p-5 text-sm flex justify-between rounded-t-md">
           <div className="flex">
             <div className="flex items-center mr-5">
@@ -69,9 +70,9 @@ export default function FarmsPage() {
             </div>
           </div>
           <Link href="/farms/create">
-            <button className="py-3 px-5 bg-primary hover:bg-primaryHover rounded-md text-white font-semibold">
+            <Button type="button" size="medium">
               Adicionar Fazenda
-            </button>
+            </Button>
           </Link>
         </div>
         <table className="w-full text-sm">
@@ -129,7 +130,7 @@ export const getServerSideProps: GetServerSideProps = async (
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/auth/signin',
         permanent: false,
       },
     }

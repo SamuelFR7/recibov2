@@ -58,7 +58,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <Container classNames="mt-[10rem] shadow-header">
+      <Container classNames="mt-[8rem] shadow-header">
         <div className="bg-white p-5 text-sm flex justify-between rounded-t-md">
           <div className="flex">
             <div className="flex items-center mr-5">
@@ -163,7 +163,7 @@ export const getServerSideProps: GetServerSideProps = async (
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/auth/signin',
         permanent: false,
       },
     }

@@ -4,11 +4,11 @@
 
 @layer base {
     :root {
-        --header-height: 5.23rem;
+        --header-height: 7rem;
     }
 
     html {
-        @apply bg-background text-text;
+        @apply bg-background text-text font-sans;
         font-size: 62.5%
     }
 }

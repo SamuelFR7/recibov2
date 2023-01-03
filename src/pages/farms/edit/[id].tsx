@@ -74,7 +74,7 @@ const EditFarm: React.FC<{ farm: FarmAsyncResult }> = ({ farm }) => {
     <div>
       <Container classNames="mt-[10rem] text-sm">
         <div className="flex flex-col w-full bg-white rounded-md shadow-header">
-          <h1 className="text-md p-5 font-semibold">Nova fazenda</h1>
+          <h1 className="text-md p-5 font-medium">Nova fazenda</h1>
           <form
             onSubmit={handleSubmit(handleEditFarm)}
             className="flex w-full flex-col gap-4 px-5 pb-5"
@@ -136,7 +136,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/auth/signin',
         permanent: false,
       },
     }

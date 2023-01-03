@@ -1,38 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     fontFamily: {
       sans: '"Roboto", Helvetica, Arial, sans-serif '
     },
-    keyframes: {
-      "fade-in": {
-        "0%": { opacity: 0 },
-        "100%": { opacity: 1 },
-      },
-      "fade-out": {
-        "0%": { opacity: 1 },
-        "100%": { opacity: 0 },
-      },
-    },
-    animation: {
-      "fade-out": "fade-out 200ms ease-out",
-      "fade-in": "fade-in 200ms ease-out"
-    },
     fontSize: {
-      xsm: '1.16rem',
-      sm: ['1.4rem', '1.4rem'],
-      md: '2.03rem',
-      lg: '2.6rem'
+      xs: '1.3rem',
+      sm: '1.4rem',
+      md: "1.6rem",
+      lg: ["2.2rem", '1.3'],
+      "2xl": ["3rem"],
+      "5xl": ["8rem", 1]
     },
     colors: {
       background: '#F5F7FA',
       black: "#000",
       white: "#fff",
       text: '#404e67',
+      'gray-text': "#bbbbbb",
       border: '#ebe9f1',
       primary: '#5FA8AB',
       primaryHover: '#549DA0',
@@ -59,7 +47,21 @@ module.exports = {
       10: "4rem",
       11: "4.4rem",
       12: "4.8rem",
-    }
+    },
+    keyframes: {
+      "fade-in": {
+        "0%": { opacity: 0 },
+        "100%": { opacity: 1 },
+      },
+      "fade-out": {
+        "0%": { opacity: 1 },
+        "100%": { opacity: 0 },
+      },
+    },
+    animation: {
+      "fade-out": "fade-out 200ms ease-out",
+      "fade-in": "fade-in 200ms ease-out"
+    },
   },
   plugins: [],
 }

@@ -17,7 +17,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref,
 ) => {
   return (
-    <div className={classnames('flex flex-col', className)}>
+    <div className={classnames('flex flex-col text-sm', className)}>
       <label className="mb-1">{label}</label>
       <input
         name={name}

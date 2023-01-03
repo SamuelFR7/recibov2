@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { unstable_getServerSession } from 'next-auth'
-import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { prisma } from '@/server/db/prisma'
 import PDFDocument from 'pdfkit'
 import { z } from 'zod'
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 async function getReceipt(id: string) {
   const receipts =
@@ -37,7 +36,10 @@ async function getReceipt(id: string) {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const supabase = createServerSupabaseClient({ req, res })
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) {
     return res.send({

@@ -1,7 +1,6 @@
+import { Session } from '@supabase/supabase-js'
 import { type inferAsyncReturnType } from '@trpc/server'
-import { type CreateNextContextOptions } from '@trpc/server/adapters/next'
-import { type Session } from 'next-auth'
-
+import { CreateNextContextOptions } from '@trpc/server/adapters/next'
 import { getServerAuthSession } from '../common/get-server-auth-session'
 
 type CreateContextOptions = {
@@ -14,10 +13,13 @@ export const createContextInner = async (opts: CreateContextOptions) => {
   }
 }
 
-export const createContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts
-
-  const session = await getServerAuthSession({ req, res })
+export const createContext = async (ctx: CreateNextContextOptions) => {
+  const session = await getServerAuthSession({
+    req: ctx.req,
+    res: ctx.res,
+    query: {},
+    resolvedUrl: '/',
+  })
 
   return await createContextInner({
     session,

@@ -16,7 +16,7 @@ export function NavItem({ href, title }: NavItemProps) {
     <Link href={href}>
       <span
         className={classNames(
-          'text-sm font-semibold hover:text-text',
+          'text-md font-medium hover:text-text',
           isActive ? 'text-text' : 'text-white',
         )}
       >
