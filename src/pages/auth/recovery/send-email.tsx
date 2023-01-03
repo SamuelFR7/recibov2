@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { useEffect } from 'react'
 
 const sendMail = z.object({
   email: z.string().email({ message: 'Digite um email válido' }),
