@@ -5,15 +5,15 @@
 
 */
 -- AlterTable
-ALTER TABLE "receipts" ADD COLUMN     "farmId" TEXT NOT NULL;
+ALTER TABLE "receipts" ADD COLUMN     "farmId" STRING NOT NULL;
 
 -- CreateTable
 CREATE TABLE "farms" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "payerName" TEXT,
-    "payerAddress" TEXT,
-    "payerDocument" TEXT,
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
+    "payerName" STRING,
+    "payerAddress" STRING,
+    "payerDocument" STRING,
 
     CONSTRAINT "farms_pkey" PRIMARY KEY ("id")
 );

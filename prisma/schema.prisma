@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
 model Receipt {
   id                String   @id @default(cuid())
-  number            Int      @unique @default(autoincrement())
+  number            Int      @unique @default(sequence())
   date              DateTime @db.Timestamp(6)
   value             Decimal
   historic          String?
