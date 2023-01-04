@@ -47,7 +47,7 @@ export function Pagination({
         </strong>{' '}
         de <strong>{totalCountOfRegisters}</strong>
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-2">
         {currentPage > 1 + siblingsCount && (
           <>
             <PaginationItem onPageChange={onPageChange} number={1} />

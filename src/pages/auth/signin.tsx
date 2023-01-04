@@ -66,7 +66,7 @@ export default function SignIn() {
                 {...register('username')}
                 error={errors.username}
                 label="Usuário"
-                placeholder="johndoe@mail.com"
+                placeholder="johndoe"
               />
               <Input
                 {...register('password')}
