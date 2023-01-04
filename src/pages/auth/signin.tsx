@@ -51,10 +51,12 @@ export default function SignIn() {
     <div className="flex w-full h-screen items-center justify-center">
       <div className="w-[33.7rem] rounded-lg bg-white shadow-header">
         <div className="flex flex-col gap-3 px-5 py-4">
-          <h1 className="text-2xl">Recibo</h1>
+          <div className="flex flex-col items-center gap-2">
+            <h1 className="text-2xl font-bold">Recibo</h1>
+            <img src="/logo.png" className="w-[64px] h-[64px]" alt="Logo" />
+          </div>
 
-          <p className="text-sm text-gray-text">Entrar agora</p>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mt-3">
             <div className="h-[1px] bg-gray" />
             <form
               className="flex flex-col gap-2"

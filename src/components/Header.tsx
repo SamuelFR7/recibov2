@@ -18,7 +18,7 @@ export function Header() {
     <header className="w-full bg-primary">
       <Container classNames="flex h-[var(--header-height)] items-center">
         <Link href="/">
-          <h1 className="text-md text-white font-bold">Recibo</h1>
+          <h1 className="text-2xl text-white font-bold">Recibo</h1>
         </Link>
         <nav className="flex ml-auto items-center gap-5">
           <NavItem href="/" title="Recibos" />
