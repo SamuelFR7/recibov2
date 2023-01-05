@@ -39,7 +39,7 @@ export function ListDialog({ children, farms }: ListDialogProps) {
           <Dialog.Title className="text-lg font-medium">
             Imprimir listagem de recibos
           </Dialog.Title>
-          <form onSubmit={handleSubmit}>
+          <form role="form" onSubmit={handleSubmit}>
             <Select
               value={farmToPrint}
               onChange={(e) => setFarmToPrint(e.target.value)}
