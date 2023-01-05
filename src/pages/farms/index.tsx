@@ -39,13 +39,13 @@ export default function FarmsPage() {
   const filteredFarms =
     search.length > 0
       ? farms.data.filter((farm) => {
-          return farm.payerName?.includes(search.toUpperCase())
+          return farm.name.includes(search.toUpperCase())
         })
       : farms.data.slice((page - 1) * farmsPerPage, page * farmsPerPage)
 
   return (
     <div>
-      <Container classNames="mt-[8rem] shadow-header">
+      <Container classNames="mt-[8rem] shadow-header mb-8">
         <div className="bg-white p-5 text-sm flex justify-between rounded-t-md">
           <div className="flex">
             <div className="flex items-center mr-5">

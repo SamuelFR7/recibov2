@@ -60,7 +60,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <Container classNames="mt-[8rem] shadow-header">
+      <Container classNames="mt-[8rem] shadow-header mb-8">
         <div className="bg-white p-5 text-sm flex justify-between rounded-t-md">
           <div className="flex">
             <div className="flex items-center mr-5">
