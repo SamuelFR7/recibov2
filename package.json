@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\""
   },
   "dependencies": {
@@ -40,13 +42,18 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.1.3",
+    "@testing-library/react": "^13.4.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/pdfkit": "^0.12.8",
+    "@vitejs/plugin-react": "^3.0.1",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.31.0",
+    "jsdom": "^20.0.3",
     "postcss": "^8.4.20",
     "prisma": "^4.8.0",
     "tailwindcss": "^3.2.4",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "vite-tsconfig-paths": "^4.0.3",
+    "vitest": "^0.26.3"
   }
 }
