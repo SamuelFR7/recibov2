@@ -158,6 +158,8 @@ export default function HomePage() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getServerAuthSession(ctx)
 
+  console.log(session)
+
   if (!session) {
     return {
       redirect: {

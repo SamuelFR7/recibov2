@@ -17,6 +17,6 @@ const isAuthed = t.middleware(({ ctx, next }) => {
 })
 
 export const protectedProcedure = t.procedure.use(isAuthed)
+export const publicProcedure = t.procedure
 
 export const router = t.router
-export const procedure = t.procedure
