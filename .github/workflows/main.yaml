@@ -1,6 +1,8 @@
 name: 'Testing CI'
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -12,6 +14,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install dependencies
+        uses: actions/setup-node@v3
         with:
           node-version: '18.x'
       - run: yarn
